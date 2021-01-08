@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrdersDao">
+<insert id="addOrders" parameterType="com.bean.Orders" >
+      insert into Orders values(null,#{hid},#{uid},#{nums},#{price},#{total},'未同意销售',#{wj})
+</insert>
+<delete id="deleteOrdersByID" parameterType="int" >
+      delete from Orders where oid=#{oid}
+</delete>
+<select id="selectOrdersByUid" resultType="com.pojo.Orderss" parameterType="int">
+     select * from Orders ,House  where Orders.hid=House.hid  and uid=#{uid}
+</select>
+<update id="UpdateOrders" parameterType="String" >
+      update Orders set status1='同意销售'  where wj=#{wj}
+</update>
+</mapper>

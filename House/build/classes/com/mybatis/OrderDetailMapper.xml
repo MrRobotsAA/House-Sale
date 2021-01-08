@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderDetailDao">
+<insert id="addOrderDetail" parameterType="com.bean.OrderDetail" >
+      insert into OrderDetail values(null,#{hid},#{uid},#{nums},#{price},#{total},'未同意销售',#{wj},#{username},#{telephone},#{idcard})
+</insert>
+<delete id="deleteOrderDetailByID" parameterType="int" >
+     <!--  delete from OrderDetail,Orders where hid=#{hid}  -->
+     DELETE orderdetail,orders FROM orderdetail LEFT JOIN orders ON orderdetail.hid=orders.hid WHERE orderdetail.oid=#{oid};
+</delete>
+<select id="selectAllOrderDetail" resultType="com.pojo.OrderDetails">
+     select * from OrderDetail ,House  where OrderDetail.hid=House.hid and  status1='未同意销售'
+</select>
+<select id="selectAllOrderDetail1" resultType="com.pojo.OrderDetails">
+     select * from OrderDetail ,House  where OrderDetail.hid=House.hid and  status1='同意销售'
+</select>
+<update id="updateOrderDetail" parameterType="String" >
+      update OrderDetail set status1='同意销售'  where wj=#{wj}
+</update>
+</mapper>

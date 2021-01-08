@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UsersDao">
+<insert id="addUsers" parameterType="com.bean.Users" >
+      insert into Users values(null,#{uname},#{upass},#{usercate},#{telephone})
+</insert>
+
+<select id="selectAllUsers" resultType="com.bean.Users">
+     select * from Users
+</select>
+<select id="selectUsersByID" resultType="com.bean.Users">
+     select * from Users where uid=#{uid}
+</select>
+<delete id="deleteUsersByID" parameterType="int" >
+      delete from Users where uid=#{uid}
+</delete>
+<select id="usersLogin" resultType="com.bean.Users">
+     select * from Users  where uname=#{uname} and upass=#{upass}
+</select>
+<update id="updateUsersByID" parameterType="com.bean.Users">
+     update Users set  upass=#{upass}, telephone=#{telephone},usercate=#{usercate} where  uid=#{uid}
+</update>
+<update id="updateUsersByID2" parameterType="com.bean.Users">
+     update Users set usercate='VIP' where  uid=#{uid}
+</update>
+</mapper>

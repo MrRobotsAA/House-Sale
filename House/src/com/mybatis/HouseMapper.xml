@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.HouseDao">
+<insert id="addHouse" parameterType="com.bean.House" >
+      insert into House values(null,#{photo},#{hname},#{housearea},#{housezlc},#{houseszlc},#{housezx},#{village},#{address},#{introd},'未售出',#{price},#{sname})
+</insert>
+<select id="selectAllHouse" resultType="com.bean.House">
+     select * from House
+</select>
+<select id="selectAllHouse1" resultType="com.bean.House">
+     select * from House  where  state='未售出'
+</select>
+<select id="selectAllHouse2" resultType="com.bean.House">
+     select * from House  where  state='已售出'
+</select>
+<delete id="deleteHouseByID" parameterType="int" >
+      delete from House where hid=#{hid}
+</delete>
+<select id="selectHouseByID" resultType="com.bean.House" parameterType="int">
+     select * from House where hid=#{hid}
+</select>
+<update id="updateHouseByID" parameterType="com.bean.House" >
+     update House  set hname=#{hname},housearea=#{housearea},housezlc=#{housezlc},houseszlc=#{houseszlc},housezx=#{housezx},village=#{village} ,address=#{address} ,introd=#{introd},price=#{price},sname=#{sname}    where hid=#{hid}
+</update>
+<update id="updateHouseByID1" parameterType="int" >
+     update House  set state='已售出'  where hid=#{hid}
+</update>
+<update id="updateHouseByID2" parameterType="int" >
+     update House  set state='未售出'  where hid=#{hid}
+</update>
+<select id="selectHouseBySname" resultType="com.bean.House" parameterType="String">
+     select * from House where sname=#{sname} and state='未售出'
+</select>
+<select id="selectHouseByHname" resultType="com.bean.House" parameterType="String">
+     select * from House where hname   like '%' #{hname}  '%' and state='未售出'
+</select>
+<select id="selectHouseByPosition" resultType="com.bean.House" parameterType="String">
+     select * from House where address like '%' #{address}  '%' and state='未售出'
+</select>
+
+<select id="selectHouseByPrice" resultType="com.bean.House" parameterType="String">
+       <![CDATA[
+       select * from House where price <= #{price} and state='未售出'
+        ]]>
+</select>
+</mapper>
